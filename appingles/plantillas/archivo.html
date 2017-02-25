@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block contenido %}
+<div align="right">
+        
+
+          <p ><a href="{% if user.is_authenticated %}{% url 'logout' %}{% else %}{% url 'login' %}{% endif %}"><i ><img src="{% static "img/Login-out-icon.png" %}" alt=""></i></a></p>
+      </div>
+<form id='formulario' method="post" action="" role="form" enctype="multipart/form-data">{% csrf_token %}
+	{{archivoform.as_p}}
+	<br>
+	<button type="submit" class="btn btn-danger" >Cargar </button>
+</form>
+	
+{% endblock %}

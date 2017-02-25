@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block contenido %}
+
+  <!-- Login form -->
+  <form class="form-inline" role="form" method="post" action="{% url 'django.contrib.auth.views.login' %}">
+    {% csrf_token %}
+
+    <!-- Usuario -->
+    {% if form.errors %}
+    <div >
+      <span class="red">Nombre de usuario o contraseña incorrecto.</span>
+    </div>
+    {% endif %}
+
+ <!-- Usuario -->
+    <div class="form-group"> 
+    <label >Usuario</label>
+  <input class="form-control" placeholder="Usuario" type="text" name="username">
+  </div>
+
+
+    <!-- Password -->
+    <div class="form-group">
+      <label >Contraseña</label>
+        <input class="form-control" type="password" placeholder="Contraseña" name="password">
+    </div>
+  <button style="margin: 0px 25px -24px;" type="submit" class="btn btn-success">Entrar</button>
+
+</form>
+{% endblock %}

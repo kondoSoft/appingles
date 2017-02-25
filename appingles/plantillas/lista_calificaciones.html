@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block contenido %}
+
+<div align="right">
+<a href="/archivo/"><i class="fa fa-user"></i></a>
+</div>
+<form action="/" method="POST" class="form-inline" role="form"> {% csrf_token %}
+	<div class="form-group"> 
+		<input class="form-control" placeholder="Ingrese matrícula" type="text" value="{% if buscar == None %}{% else %}{{buscar}}{% endif %}" name="buscar" id="matricula" maxlength="8">
+	</div>
+	<button type="submit" class="btn btn-danger">Buscar</button>
+
+	<select id="clasificacion" class="form-control">
+		{% if q == None %}{% else %}<option value="">Seleccione idioma</option>{% endif %}
+		{% for datos in q %}
+		<option value="{{datos.clasificacion_materia}}" id="selected">{{datos.clasificacion_materia}}</option>
+		{% endfor %}
+
+	</select>
+
+</form>	
+<br>
+<div>
+
+</div>
+{% if consulta %}
+<div class="widget">
+
+	
+
+	<div class="widget-content">
+		
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Idioma</th>
+					<th>Materia</th>
+					<th>Sep</th>
+					<th>Oct</th>
+					<th>Nov</th>
+					<th>Dic</th>
+					<th>Ene</th>
+					<th>Feb</th>
+					<th>Mar</th>
+					<th>May</th>
+					<th>Jun</th>
+					<th>Primer Trimestre</th>
+					<th>Promedio</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for dato in consulta  %}
+				<tr>
+					<td>{{dato.clasificacion_materia}}</td>
+					<td>{{dato.nombre_materia}}</td>
+					<td>
+						{% if dato.calif_sep == None and dato.calif_sep == blank %}
+						0
+						{% else %}
+						{{dato.calif_sep}}
+						{% endif %}
+					</td>
+					<td>
+						{% if dato.calif_oct == None %}
+						0
+						{% else %}
+						{{dato.calif_oct}}
+						{% endif %}
+					</td>
+					<td>
+						{% if dato.calif_nov == None%}
+						0
+						{% else %}
+						{{dato.calif_nov}}
+						{% endif %}
+					</td>
+					<td>
+						{% if dato.calif_dic == None %}
+						0
+						{% else %}
+						{{dato.calif_dic}}
+						{% endif %}
+					</td>
+					<td>
+						{% if dato.calif_ene == None %}
+						0
+						{% else %}
+						{{dato.calif_ene}}
+						{% endif %}
+					</td>
+					<td>
+						{% if dato.calif_feb == None %}
+						0
+						{% else %}
+						{{dato.calif_feb}}
+						{% endif %}
+					</td>
+					<td>
+						{% if dato.calif_mar == None %}
+						0
+						{% else %}
+						{{dato.calif_mar}}
+						{% endif %}
+					</td>
+					<td>
+						{% if dato.calif_may == None %}
+						0
+						{% else %}
+						{{dato.calif_may}}
+						{% endif %}
+					</td>
+					<td>
+						{% if dato.calif_jun == None %}
+						0
+						{% else %}
+						{{dato.calif_jun}}
+						{% endif %}
+					</td>
+					<td>{{dato.primer_trimestre}}</td>
+					<td>{{dato.promedio}}</td>
+				</tr>
+				{% endfor %}
+
+
+			</tbody>
+		</table>
+		
+
+	</div>
+</div>
+{% endif %}
+
+{% endblock %}

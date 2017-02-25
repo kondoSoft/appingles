@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="es"> <![endif]-->
+<!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="es"> <![endif]-->
+<!--[if IE 8]> <html class="lt-ie9" lang="es"> <![endif]-->
+<!--[if gt IE 8]><!--><html lang="es"><!--<![endif]-->
+<head>
+	<meta charset='utf-8'>
+	<title>{% block titulo %}Calificaciones-Ingles{% endblock %}</title>
+	{% load staticfiles %}
+
+<link rel="stylesheet" href="{% static "css/bootstrap.css" %}" media="screen">
+	
+
+	
+  <!-- Font awesome icon -->
+  <link rel="stylesheet" href="{% static "css/font-awesome.css" %}"> 
+  <!-- jQuery UI -->
+
+    <!-- Bootstrap toggle -->
+  <link rel="stylesheet" href="{% static "css/dataTables.bootstrap.css" %}">
+  <!-- Main stylesheet -->
+  <link href="{% static "css/style.css" %}" rel="stylesheet">
+  <!-- Widgets stylesheet -->
+  <link href="{% static "css/widgets.css" %}" rel="stylesheet">   
+	
+</head>
+<body>
+	<div class="container">
+		<div class="well">
+
+			{% if messages %}
+
+
+			{% for message in messages %}
+			<span{% if message.tags %} class="green {{ message.tags }}"{% endif %}>{{ message }}</span>
+
+			{% endfor %}
+
+			{% endif %}
+			<section class="contenido">
+				{% block contenido %}{% endblock %}
+			</section><br/>
+			
+		</div>
+	</div>
+	<script src="{% static "js/jquery-1.10.1.min.js" %}"></script>
+	<script src="{% static "js/jquery-migrate-1.2.1.min.js" %}"></script>
+	<script src="{% static "js/bootstrap.min.js" %}"></script>
+
+	<script>
+		$("#clasificacion").change(function(){
+			var matricula = document.getElementById('matricula').value;
+			var clasificacion = document.getElementById('clasificacion').value;
+			window.location.href = '/clasifica/'+matricula+'&'+clasificacion;
+
+
+		});
+	</script>
+
+</body>
+</html>
